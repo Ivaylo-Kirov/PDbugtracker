@@ -8,8 +8,9 @@ projects = [
 
 # Create your views here.
 def home(request):
+        
     context = {
-        'projects': Project.objects.all(),
+        'projects': Project.objects.filter(editors=request.user),
         'title': 'Projects'
     }
     return render(request, 'projects/home.html', context)
