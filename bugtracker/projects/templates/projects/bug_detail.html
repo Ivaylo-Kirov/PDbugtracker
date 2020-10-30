@@ -1,0 +1,16 @@
+{% extends "status/base.html" %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            Project: <a class="mr-2" href="#">{{ bug.project }}</a>
+            Author: <a class="mr-2" href="#">{{ bug.author }}</a>
+            <small class="text-muted">Date Created: {{ bug.date_added }}</small>
+            <small class="text-muted">Last Modified: {{ bug.date_modified }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ bug.desc }}</a></h2>
+            <p class="article-content">Bug Type: {{ bug.get_bug_type_display }}</p>
+        </div>
+    </article>
+    
+{% endblock content %}
