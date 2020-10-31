@@ -4,11 +4,10 @@
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
-                <a class="mr-2" href="#">Empty Value</a>
                 <small class="text-muted">Date Created: {{ project.date_added }}</small>
                 <small class="text-muted">Last Modified: {{ project.date_modified }}</small>
                 </div>
-                <h2><a class="article-title" href="#">{{ project.name }}</a></h2>
+                <h2><a class="article-title" href="{% url 'bugs-project' project.id %}">{{ project.name }}</a></h2>
                 <p class="article-content">{{ project.get_proj_type_display }}</p>
             </div>
         </article>

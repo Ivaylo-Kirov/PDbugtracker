@@ -11,9 +11,11 @@
         <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages}}">Last</a>
     {% endif %}
     {% endif %}
+    <h3>Bugs for project ID: {{ view.kwargs.id }} | Total bugs: {{ page_obj.paginator.count }}</h3>
     {% for bug in object_list %}
         <article class="media content-section">
             <div class="media-body">
+                
                 <div class="article-metadata">
                 Project: <a class="mr-2" href="#">{{ bug.project }}</a>
                 Author: <a class="mr-2" href="#">{{ bug.author }}</a>
