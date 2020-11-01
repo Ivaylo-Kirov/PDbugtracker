@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Project, Bug
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 projects = [
     {'name': 'First Project'},
@@ -35,6 +36,10 @@ class BugProjectListView(LoginRequiredMixin, ListView):
 class BugDetailView(LoginRequiredMixin, DetailView):
     model = Bug
 
+class BugDeleteView(LoginRequiredMixin, DeleteView):
+    model = Bug
+    success_url = reverse_lazy('bugs-list')
+
 class BugCreateView(LoginRequiredMixin, CreateView):
     model = Bug
     fields = ['desc', 'bug_type', 'project']
@@ -45,7 +50,7 @@ class BugCreateView(LoginRequiredMixin, CreateView):
 
 class BugUpdateView(LoginRequiredMixin, UpdateView):
     model = Bug
-    fields = ['desc', 'bug_type']
+    fields = ['name', 'desc', 'bug_type']
 
     def form_valid(self, form):
         form.instance.author = self.request.user

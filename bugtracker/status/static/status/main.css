@@ -16,6 +16,10 @@ body {
     background-color: #5f788a;
   }
   
+  .bg-arctic-blue {
+    background-color: #2C3E50;
+  }
+
   .site-header .navbar-nav .nav-link {
     color: #cbd5db;
   }
@@ -37,7 +41,7 @@ body {
   }
   
   .article-title {
-    color: #444444;
+    color:#1E456E;
   }
   
   a.article-title:hover {

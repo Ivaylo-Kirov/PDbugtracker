@@ -22,6 +22,7 @@ class Project(models.Model):
 
 class Bug(models.Model):
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=50)
     desc = models.CharField(max_length=200)
     BUG_TYPES = (
         ('V', 'Visual'),
