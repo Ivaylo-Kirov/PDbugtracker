@@ -42,7 +42,7 @@ class BugDeleteView(LoginRequiredMixin, DeleteView):
 
 class BugCreateView(LoginRequiredMixin, CreateView):
     model = Bug
-    fields = ['desc', 'bug_type', 'project']
+    fields = ['name', 'desc', 'bug_type', 'project']
 
     def form_valid(self, form):
         form.instance.author = self.request.user

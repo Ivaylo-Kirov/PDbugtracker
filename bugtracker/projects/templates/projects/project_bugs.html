@@ -1,45 +1,45 @@
 {% extends "status/base.html" %}
 {% block content %}
+    <p><a class="btn btn-outline-primary" href="{% url 'bugs-create' %}"><i class="fas fa-bug"></i> Create New Bug</a></p>
     {% if is_paginated %}
     {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page=1"><i class="fas fa-angle-double-left"></i> First</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}"><i class="fas fa-angle-left"></i> Previous</a>
+        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page=1"><i class="fas fa-angle-double-left"></i> First</a>
+        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.previous_page_number}}"><i class="fas fa-angle-left"></i> Previous</a>
     {% endif %}
 
     {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}">Next <i class="fas fa-angle-right"></i></a>
-        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages}}">Last <i class="fas fa-angle-double-right"></i></a>
+        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.next_page_number}}">Next <i class="fas fa-angle-right"></i></a>
+        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.paginator.num_pages}}">Last <i class="fas fa-angle-double-right"></i></a>
     {% endif %}
     {% endif %}
     <h3>Bugs for project ID: {{ view.kwargs.id }} | Total bugs: {{ page_obj.paginator.count }}</h3>
     {% for bug in object_list %}
         <article class="media content-section">
             <div class="media-body">
-                
                 <div class="article-metadata">
-                    Project: {{ bug.project }} | Author: {{ bug.author }}<br/>
+                    <small class="text-muted">Author: {{ bug.author }}<br/></small>
                     <small class="text-muted">Date Created: {{ bug.date_added }}</small>
                     <small class="text-muted">Last Modified: {{ bug.date_modified }}</small>
-                    </div>
-                    <h2><a class="article-title" href="#">{{ bug.name }}</a></h2>
-                    <p>{{bug.desc}}</p>
-                    <p class="article-content">Bug Type: {{ bug.get_bug_type_display }}</p>
-                    <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-detail' bug.id %}"> View Full Details</a> 
-                    <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-update' bug.id %}"><i class="far fa-edit"></i> Edit</a>
-                    <a class="btn btn-outline-danger btn-sm" href="{% url 'bugs-delete' bug.id %}"><i class="far fa-trash-alt"></i> Delete</a>
+                </div>
+                <h2><a class="article-title" href="{% url 'bugs-detail' bug.id %}">{{ bug.name }}</a></h2>
+                <p>{{bug.desc}}</p>
+                <p class="article-content">Bug Type: {{ bug.get_bug_type_display }}</p>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-detail' bug.id %}"><i class="far fa-file-alt"></i> View Full Details</a> 
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-update' bug.id %}"><i class="far fa-edit"></i> Edit</a>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'bugs-delete' bug.id %}"><i class="far fa-trash-alt"></i> Delete</a>
             </div>
         </article>
     {% endfor %}
 
     {% if is_paginated %}
     {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page=1"><i class="fas fa-angle-double-left"></i> First</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}"><i class="fas fa-angle-left"></i> Previous</a>
+        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page=1"><i class="fas fa-angle-double-left"></i> First</a>
+        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.previous_page_number}}"><i class="fas fa-angle-left"></i> Previous</a>
     {% endif %}
 
     {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}">Next <i class="fas fa-angle-right"></i></a>
-        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages}}">Last <i class="fas fa-angle-double-right"></i></a>
+        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.next_page_number}}">Next <i class="fas fa-angle-right"></i></a>
+        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.paginator.num_pages}}">Last <i class="fas fa-angle-double-right"></i></a>
     {% endif %}
     {% endif %}
     
