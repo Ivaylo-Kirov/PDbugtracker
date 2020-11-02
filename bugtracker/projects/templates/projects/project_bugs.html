@@ -1,18 +1,11 @@
 {% extends "status/base.html" %}
 {% block content %}
-    <p><a class="btn btn-outline-primary" href="{% url 'bugs-create' %}"><i class="fas fa-bug"></i> Create New Bug</a></p>
-    {% if is_paginated %}
-    {% if page_obj.has_previous %}
-        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page=1"><i class="fas fa-angle-double-left"></i> First</a>
-        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.previous_page_number}}"><i class="fas fa-angle-left"></i> Previous</a>
-    {% endif %}
+    <h1>Bugs List</h1>
+    <h4>Project ID: {{ view.kwargs.id }} | Total bugs: {{ page_obj.paginator.count }}</h4>
+    {% include 'projects/pagination.html' %}
+    <p><a class="btn btn-primary btn-lg" style="width: 100%;" href="{% url 'bugs-create' %}"><i class="fas fa-bug"></i> Create New Bug</a></p>
 
-    {% if page_obj.has_next %}
-        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.next_page_number}}">Next <i class="fas fa-angle-right"></i></a>
-        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.paginator.num_pages}}">Last <i class="fas fa-angle-double-right"></i></a>
-    {% endif %}
-    {% endif %}
-    <h3>Bugs for project ID: {{ view.kwargs.id }} | Total bugs: {{ page_obj.paginator.count }}</h3>
+    
     {% for bug in object_list %}
         <article class="media content-section">
             <div class="media-body">
@@ -31,16 +24,6 @@
         </article>
     {% endfor %}
 
-    {% if is_paginated %}
-    {% if page_obj.has_previous %}
-        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page=1"><i class="fas fa-angle-double-left"></i> First</a>
-        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.previous_page_number}}"><i class="fas fa-angle-left"></i> Previous</a>
-    {% endif %}
-
-    {% if page_obj.has_next %}
-        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.next_page_number}}">Next <i class="fas fa-angle-right"></i></a>
-        <a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{page_obj.paginator.num_pages}}">Last <i class="fas fa-angle-double-right"></i></a>
-    {% endif %}
-    {% endif %}
+    {% include 'projects/pagination.html' %}
     
 {% endblock content %}

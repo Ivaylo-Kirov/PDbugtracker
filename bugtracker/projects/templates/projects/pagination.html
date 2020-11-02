@@ -1,0 +1,19 @@
+    {% if is_paginated %}
+    <div class="container" style="display: flex; justify-content: center;">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-light btn-sm mb-4" href="?page=1"><i class="fas fa-angle-double-left"></i> First</a>
+            <a class="btn btn-light btn-sm mb-4" href="?page={{page_obj.previous_page_number}}"><i class="fas fa-angle-left"></i> Previous</a>
+        {% else %}
+            <a class="btn btn-light btn-sm mb-4 disabled" href="#" role="button" aria-disabled="true"><i class="fas fa-angle-double-left"></i> First</a>
+            <a class="btn btn-light btn-sm mb-4 disabled" href="#" role="button" aria-disabled="true"><i class="fas fa-angle-left"></i> Previous</a>
+        {% endif %}
+        <div style="padding: 4px 20px 20px 20px;">Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</div>
+        {% if page_obj.has_next %}
+            <a class="btn btn-light btn-sm mb-4" href="?page={{page_obj.next_page_number}}">Next <i class="fas fa-angle-right"></i></a>
+            <a class="btn btn-light btn-sm mb-4" href="?page={{page_obj.paginator.num_pages}}">Last <i class="fas fa-angle-double-right"></i></a>
+        {% else %}
+            <a class="btn btn-light btn-sm mb-4 disabled" href="#" role="button" aria-disabled="true">Next <i class="fas fa-angle-right"></i></a>
+            <a class="btn btn-light btn-sm mb-4 disabled" href="#" role="button" aria-disabled="true">Last <i class="fas fa-angle-double-right"></i></a>
+        {% endif %}
+    </div>
+    {% endif %}

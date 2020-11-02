@@ -9,6 +9,11 @@
             </div>
             <h2>{{ bug.name }}</h2>
             <p>{{bug.desc}}</p>
+            {% if bug.image.url != '/media/default_bug.png' %}
+                <img class="bug_image" src="{{ bug.image.url }}">
+            {% else %}
+                <img src="{{ bug.image.url }}">
+            {% endif %}
             <p class="article-content">Bug Type: {{ bug.get_bug_type_display }}</p>
             <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-update' bug.id %}"><i class="far fa-edit"></i> Edit</a>
             <a class="btn btn-outline-danger btn-sm" href="{% url 'bugs-delete' bug.id %}"><i class="far fa-trash-alt"></i> Delete</a>

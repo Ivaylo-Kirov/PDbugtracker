@@ -12,6 +12,10 @@ body {
   ul {
     margin: 0;
   }
+
+  .bug_image {
+    max-width: 100%;
+  }
   
   .bg-steel {
     background-color: #5f788a;

@@ -36,6 +36,8 @@ class Bug(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
+    image = models.ImageField(upload_to='bug_pics', default='default_bug.png')
+
     def __str__(self):
         return f'Bug ID: {self.id}'
     
