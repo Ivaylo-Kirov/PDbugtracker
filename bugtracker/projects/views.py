@@ -4,16 +4,17 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
-projects = [
-    {'name': 'First Project'},
-    {'name': 'Second Project'}
-]
-
 # Create your views here.
 def home(request):
         
+    #latest_bugs = Project.bug_set.all().order_by('date_added')[:3]
+    projects = Project.objects.filter(editors=request.user)
+    #bugs = projects.first().bug_set.all() #how do I filter this on a per project basis, right now it just returns bugs for the first project
+
+    #.bug_set.all().order_by('date_added')
     context = {
-        'projects': Project.objects.filter(editors=request.user),
+        'projects': projects,
+        #'latest_bugs': bugs,
         'title': 'Projects'
     }
     return render(request, 'projects/home.html', context)

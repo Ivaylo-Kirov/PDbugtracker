@@ -43,3 +43,6 @@ class Bug(models.Model):
     
     def get_absolute_url(self):
         return reverse('bugs-detail', kwargs={'pk': self.pk})
+
+    class Meta:
+        ordering = ['-date_added']
