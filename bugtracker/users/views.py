@@ -37,8 +37,6 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user) # passing the current user instance allows you to prepopulate the form fields
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    
-
     context = {
         'u_form': u_form,
         'p_form': p_form

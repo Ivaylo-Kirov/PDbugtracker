@@ -3,6 +3,7 @@ from .models import Project, Bug
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django import forms
 
 # Create your views here.
 def home(request):
@@ -41,17 +42,34 @@ class BugDeleteView(LoginRequiredMixin, DeleteView):
     model = Bug
     success_url = reverse_lazy('bugs-list')
 
+
+class BugCreateSupportForm(forms.ModelForm):
+    class Meta:
+        model = Bug
+        fields = ['name', 'desc', 'image', 'bug_type', 'project']
+        widgets = {
+            'desc': forms.Textarea
+        }
+
 class BugCreateView(LoginRequiredMixin, CreateView):
+    form_class = BugCreateSupportForm # form_class allows you to use forms.ModelForm and utilize functionality like widgets
     model = Bug
-    fields = ['name', 'desc', 'image', 'bug_type', 'project']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+class BugUpdateSupportForm(forms.ModelForm):
+    class Meta:
+        model = Bug
+        fields = ['name', 'desc', 'image', 'bug_type']
+        widgets = {
+            'desc': forms.Textarea
+        }
+
 class BugUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = BugUpdateSupportForm 
     model = Bug
-    fields = ['name', 'desc', 'image', 'bug_type']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
