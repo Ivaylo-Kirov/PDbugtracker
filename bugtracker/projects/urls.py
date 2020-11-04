@@ -10,4 +10,5 @@ urlpatterns = [
     path('bugs/update/<int:pk>', BugUpdateView.as_view(), name="bugs-update"),
     path('bugs/delete/<int:pk>', BugDeleteView.as_view(), name="bugs-delete"),
     path('bugs/project/<int:id>', BugProjectListView.as_view(), name="bugs-project"),
+    path('search-results/', views.search_results, name="search-results")
 ]

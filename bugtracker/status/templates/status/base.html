@@ -31,6 +31,7 @@
                 {% if user.is_authenticated %}
                   <a class="nav-item nav-link" href="{% url 'projects-home' %}"><i class="fas fa-tasks"></i> Projects</a>
                   <a class="nav-item nav-link" href="{% url 'bugs-list' %}"><i class="fas fa-bug"></i> Bugs</a>
+                    
                 {% endif %}
                 </div>
                 <!-- Navbar Right Side -->
@@ -41,6 +42,10 @@
                     <img src="{{user.profile.image.url}}" style="zoom:15%;" class="mr-5"/>
                     <a class="nav-item nav-link" href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    <form type="get" action="{% url 'search-results' %}" accept-charset="utf-8" class="form-inline">
+                      <input class="form-control form-control-sm ml-sm-2 mr-sm-2" type="search" placeholder="Search Bugs..." aria-label="Search" id="q" name="q">
+                      <button class="btn btn-light my-2 my-sm-0 btn-sm" type="submit">Search</button>
+                    </form>
                   {% else %}
                     <a class="nav-item nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
                     <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>

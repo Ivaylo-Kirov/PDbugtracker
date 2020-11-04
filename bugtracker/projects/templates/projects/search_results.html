@@ -1,0 +1,26 @@
+{% extends "status/base.html" %}
+{% block content %}
+    <h1>Search Results For: {{ query }}</h1>
+    {% if bugs %}
+    <p>Found {{ bugs|length }} bug{{ bugs|pluralize }}.</p>
+        {% for bug in bugs %}
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <small class="text-muted">Project: <a href="{% url 'bugs-project' bug.project.id %}">{{ bug.project }}</a> | Author: {{ bug.author }}<br/></small>
+                        <small class="text-muted">Date Created: {{ bug.date_added }}</small>
+                        <small class="text-muted">Last Modified: {{ bug.date_modified }}</small>
+                    </div>
+                    <h2><a class="article-title" href="{% url 'bugs-detail' bug.id %}">{{ bug.name }}</a></h2>
+                    <p>{{bug.desc}}</p>
+                    <p class="article-content">Bug Type: {{ bug.get_bug_type_display }}</p>
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-detail' bug.id %}"><i class="far fa-file-alt"></i> View Full Details</a> 
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-update' bug.id %}"><i class="far fa-edit"></i> Edit</a>
+                    <a class="btn btn-outline-danger btn-sm" href="{% url 'bugs-delete' bug.id %}"><i class="far fa-trash-alt"></i> Delete</a>
+                </div>
+            </article>    
+        {% endfor %}
+    {% else %}
+        <p>No bugs matched your search criteria.</p>
+    {% endif %}
+{% endblock content %}

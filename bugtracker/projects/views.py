@@ -4,10 +4,11 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django import forms
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 def home(request):
-        
     projects = Project.objects.filter(editors=request.user)
     #bugs = projects.first().bug_set.all() #how do I filter this on a per project basis, right now it just returns bugs for the first project
 
@@ -16,6 +17,14 @@ def home(request):
         'title': 'Projects'
     }
     return render(request, 'projects/home.html', context)
+
+def search_results(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        bugs = Bug.objects.filter(desc__icontains=q)
+        return render(request, 'projects/search_results.html', {'bugs': bugs, 'query': q})
+    else:
+        return HttpResponse('Please submit a search term.')
 
 class BugListView(LoginRequiredMixin, ListView):
     model = Bug

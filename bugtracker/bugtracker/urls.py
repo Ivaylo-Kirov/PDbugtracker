@@ -32,7 +32,7 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('status/', include('status.urls')),
     path('register/', user_views.register, name='register'),
-    path('projects/', include('projects.urls'))
+    path('projects/', include('projects.urls')),
 ] 
 
 if settings.DEBUG:
