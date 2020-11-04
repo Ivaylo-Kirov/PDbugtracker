@@ -8,14 +8,11 @@ from django import forms
 # Create your views here.
 def home(request):
         
-    #latest_bugs = Project.bug_set.all().order_by('date_added')[:3]
     projects = Project.objects.filter(editors=request.user)
     #bugs = projects.first().bug_set.all() #how do I filter this on a per project basis, right now it just returns bugs for the first project
 
-    #.bug_set.all().order_by('date_added')
     context = {
         'projects': projects,
-        #'latest_bugs': bugs,
         'title': 'Projects'
     }
     return render(request, 'projects/home.html', context)
@@ -43,10 +40,13 @@ class BugDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('bugs-list')
 
 
+############
+## CREATE ##
+############
 class BugCreateSupportForm(forms.ModelForm):
     class Meta:
         model = Bug
-        fields = ['name', 'desc', 'image', 'bug_type', 'project']
+        fields = ['name', 'desc', 'image', 'image2', 'bug_type', 'project']
         widgets = {
             'desc': forms.Textarea
         }
@@ -58,11 +58,18 @@ class BugCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+############
+############
 
+
+
+############
+## UPDATE ##
+############
 class BugUpdateSupportForm(forms.ModelForm):
     class Meta:
         model = Bug
-        fields = ['name', 'desc', 'image', 'bug_type']
+        fields = ['name', 'desc', 'image', 'image2', 'bug_type']
         widgets = {
             'desc': forms.Textarea
         }
@@ -74,3 +81,5 @@ class BugUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+############
+############

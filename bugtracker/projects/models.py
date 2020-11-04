@@ -37,6 +37,7 @@ class Bug(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     image = models.ImageField(upload_to='bug_pics', default='default_bug.png')
+    image2 = models.ImageField(upload_to='bug_pics', default='default_bug.png')
 
     def __str__(self):
         return f'Bug ID: {self.id}'
