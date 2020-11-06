@@ -17,6 +17,21 @@
             <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-update' bug.id %}"><i class="far fa-edit"></i> Edit</a>
             <a class="btn btn-outline-danger btn-sm" href="{% url 'bugs-delete' bug.id %}"><i class="far fa-trash-alt"></i> Delete</a>
         </div>
+        
+        
     </article>
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                Comments
+                <ul>
+                {% for comment in bug.comment_set.all %}
+                <li>{{comment.desc}}</li>
+                {% endfor %}
+            </ul>
+            </div>
+        </div>
+    </article>
+
     
 {% endblock content %}

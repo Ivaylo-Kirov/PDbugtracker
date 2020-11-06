@@ -47,3 +47,11 @@ class Bug(models.Model):
 
     class Meta:
         ordering = ['-date_added']
+
+class Comment(models.Model):
+    desc = models.CharField(max_length=1000)
+    date_added = models.DateTimeField(auto_now_add=True)
+    bug = models.ForeignKey(Bug, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-date_added']
