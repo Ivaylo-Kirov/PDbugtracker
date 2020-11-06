@@ -3,9 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-
-# Create your models here.
-
 class Project(models.Model):
     name = models.CharField(max_length=50)
     PROJ_TYPES = (
@@ -52,6 +49,14 @@ class Comment(models.Model):
     desc = models.CharField(max_length=1000)
     date_added = models.DateTimeField(auto_now_add=True)
     bug = models.ForeignKey(Bug, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    image = models.ImageField(upload_to='bug_pics', default='default_bug.png')
+
+    def get_absolute_url(self):
+        return reverse('bugs-detail', kwargs={'pk': self.bug.pk})
 
     class Meta:
         ordering = ['-date_added']
+    
+    def __str__(self):
+        return f'Comment ID: {self.id}'

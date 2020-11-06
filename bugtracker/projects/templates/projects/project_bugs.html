@@ -10,9 +10,15 @@
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
-                    <small class="text-muted">Author: {{ bug.author }}<br/></small>
-                    <small class="text-muted">Date Created: {{ bug.date_added }}</small>
-                    <small class="text-muted">Last Modified: {{ bug.date_modified }}</small>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <small class="text-muted"><strong>Author:</strong> {{ bug.author }}</small>
+                        </div>
+                        <div>
+                            <small class="text-muted"><strong>Date Created:</strong> {{ bug.date_added }}</small>
+                            <small class="text-muted"><strong>Last Modified:</strong> {{ bug.date_modified }}</small>
+                        </div>
+                    </div>
                 </div>
                 <h2><a class="article-title" href="{% url 'bugs-detail' bug.id %}">{{ bug.name }}</a></h2>
                 <p>{{bug.desc}}</p>

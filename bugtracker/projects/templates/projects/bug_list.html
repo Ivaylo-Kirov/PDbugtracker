@@ -8,7 +8,7 @@
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
-                    <small class="text-muted">Project: <a href="{% url 'bugs-project' bug.project.id %}">{{ bug.project }}</a> | Author: {{ bug.author }}<br/></small>
+                    <small class="text-muted"><strong>Project:</strong> <a href="{% url 'bugs-project' bug.project.id %}">{{ bug.project }}</a> | <strong>Author:</strong> {{ bug.author }}<br/></small>
                     <small class="text-muted">Date Created: {{ bug.date_added }}</small>
                     <small class="text-muted">Last Modified: {{ bug.date_modified }}</small>
                 </div>

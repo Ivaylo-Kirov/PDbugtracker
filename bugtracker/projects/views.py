@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Project, Bug
+from .models import Project, Bug, Comment
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -67,8 +67,20 @@ class BugCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    fields = ['desc', 'image']
+
+    def form_valid(self, form):
+        bug = get_object_or_404(Bug, id=self.kwargs.get('id'))
+        form.instance.bug = bug
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 ############
 ############
+
+
 
 
 
