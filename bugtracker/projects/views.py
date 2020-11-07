@@ -5,7 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django import forms
 from django.core.paginator import Paginator
-
+from django.views.decorators.http import require_GET
+from django.http import HttpResponse, Http404
 
 # Create your views here.
 def home(request):
@@ -18,13 +19,14 @@ def home(request):
     }
     return render(request, 'projects/home.html', context)
 
+@require_GET
 def search_results(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
         bugs = Bug.objects.filter(desc__icontains=q)
         return render(request, 'projects/search_results.html', {'bugs': bugs, 'query': q})
     else:
-        return HttpResponse('Please submit a search term.')
+        raise Http404("Invalid Search")
 
 class BugListView(LoginRequiredMixin, ListView):
     model = Bug
