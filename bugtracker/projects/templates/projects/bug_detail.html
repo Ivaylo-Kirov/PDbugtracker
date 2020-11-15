@@ -7,7 +7,7 @@
             <small class="text-muted">Date Created: {{ bug.date_added }}</small>
             <small class="text-muted">Last Modified: {{ bug.date_modified }}</small>
             </div>
-            <h2>{{ bug.name }}</h2>
+            <h2>{{ bug.name|title }}</h2>
             <p>{{bug.desc}}</p>
                 <img class="bug_image" src="{{ bug.image.url }}">
             {% if bug.image2.url != '/media/default_bug.png' %}

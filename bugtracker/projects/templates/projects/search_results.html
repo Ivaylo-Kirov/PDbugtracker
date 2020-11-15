@@ -11,7 +11,7 @@
                         <small class="text-muted">Date Created: {{ bug.date_added }}</small>
                         <small class="text-muted">Last Modified: {{ bug.date_modified }}</small>
                     </div>
-                    <h2><a class="article-title" href="{% url 'bugs-detail' bug.id %}">{{ bug.name }}</a></h2>
+                    <h2><a class="article-title" href="{% url 'bugs-detail' bug.id %}">{{ bug.name|title }}</a></h2>
                     <p>{{bug.desc}}</p>
                     <p class="article-content">Bug Type: {{ bug.get_bug_type_display }}</p>
                     <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-detail' bug.id %}"><i class="far fa-file-alt"></i> View Full Details</a> 

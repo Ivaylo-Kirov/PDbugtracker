@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Project, Bug, Comment
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django import forms
 from django.core.paginator import Paginator
@@ -9,6 +10,7 @@ from django.views.decorators.http import require_GET
 from django.http import HttpResponse, Http404
 
 # Create your views here.
+@login_required
 def home(request):
     projects = Project.objects.filter(editors=request.user)
     #bugs = projects.first().bug_set.all() #how do I filter this on a per project basis, right now it just returns bugs for the first project
