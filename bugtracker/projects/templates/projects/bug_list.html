@@ -4,7 +4,8 @@
     {% include 'projects/pagination.html' %}
     <p><a class="btn btn-primary btn-lg" style="width: 100%;" href="{% url 'bugs-create' %}"><i class="fas fa-bug"></i> Create New Bug</a></p>
         
-    {% for bug in object_list %}
+    {% for bug in bug_list %} 
+    {# overriding context_object_name allows you to specify a name of the list of objects (i.e. bug_list) instead of the default "object_list" #}
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">

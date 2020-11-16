@@ -13,12 +13,14 @@ from django.http import HttpResponse, Http404
 @login_required
 def home(request):
     projects = Project.objects.filter(editors=request.user)
+    # if this is converted to a class-based view, the user can be accessed with self.request.user and used for queryset filtering
     #bugs = projects.first().bug_set.all() #how do I filter this on a per project basis, right now it just returns bugs for the first project
 
     context = {
         'projects': projects,
         'title': 'Projects'
     }
+    
     return render(request, 'projects/home.html', context)
 
 @require_GET
@@ -32,6 +34,7 @@ def search_results(request):
 
 class BugListView(LoginRequiredMixin, ListView):
     model = Bug
+    context_object_name = "bug_list"
     ordering = ['-date_added']
     paginate_by = 5
 
@@ -42,11 +45,14 @@ class BugProjectListView(LoginRequiredMixin, ListView):
     template_name="projects/project_bugs.html"
 
     def get_queryset(self):
-        project = get_object_or_404(Project, id=self.kwargs.get('id'))
+        project = get_object_or_404(Project, id=self.kwargs.get('id')) # can also just do self.kwargs['id'] here. Standard Python dict retrieval.
         return Bug.objects.filter(project=project)
 
 class BugDetailView(LoginRequiredMixin, DetailView):
     model = Bug
+
+    # overriding get_object here allows you to apply extra functionality, such as modifying a "last_accessed" value on the db object before returning it to the user
+    # https://docs.djangoproject.com/en/3.1/topics/class-based-views/generic-display/#performing-extra-work
 
 class BugDeleteView(LoginRequiredMixin, DeleteView):
     model = Bug
