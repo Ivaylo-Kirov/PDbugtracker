@@ -10,7 +10,6 @@ class Project(models.Model):
         ('P', 'Print'),
         ('O', 'Other'),
     )
-    name = models.CharField(max_length=60)
     proj_type = models.CharField(max_length=1, choices=PROJ_TYPES)
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
