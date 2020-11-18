@@ -100,7 +100,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 class BugUpdateSupportForm(forms.ModelForm):
     class Meta:
         model = Bug
-        fields = ['name', 'desc', 'image', 'image2', 'bug_type']
+        fields = ['name', 'desc', 'image', 'image2', 'bug_type', 'resolved']
         widgets = {
             'desc': forms.Textarea
         }

@@ -35,6 +35,8 @@ class Bug(models.Model):
     image = models.ImageField(upload_to='bug_pics', default='default_bug.png')
     image2 = models.ImageField(upload_to='bug_pics', default='default_bug.png')
 
+    resolved = models.BooleanField(default=False)
+
     def __str__(self):
         return f'Bug ID: {self.id}'
     
