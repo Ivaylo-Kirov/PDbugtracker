@@ -78,9 +78,18 @@ class BugCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+
+class CommentCreateSupportForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['desc', 'image']
+        widgets = {
+            'desc': forms.Textarea
+        }
+
 class CommentCreateView(LoginRequiredMixin, CreateView):
-    model = Comment
-    fields = ['desc', 'image']
+    form_class = CommentCreateSupportForm
+    template_name = 'projects/comment_form.html'
 
     def form_valid(self, form):
         bug = get_object_or_404(Bug, id=self.kwargs.get('id'))

@@ -21,7 +21,7 @@ class Project(models.Model):
 class Bug(models.Model):
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=50)
-    desc = models.CharField(max_length=2000)
+    desc = models.CharField(max_length=2000, help_text="2000 character limit.")
     BUG_TYPES = (
         ('V', 'Visual'),
         ('L', 'Logical'),
@@ -47,7 +47,7 @@ class Bug(models.Model):
         ordering = ['-date_added']
 
 class Comment(models.Model):
-    desc = models.CharField(max_length=1000)
+    desc = models.CharField(max_length=1000, help_text="1000 character limit.")
     date_added = models.DateTimeField(auto_now_add=True)
     bug = models.ForeignKey(Bug, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
