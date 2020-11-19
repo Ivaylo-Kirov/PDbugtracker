@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.contrib.auth.forms import PasswordChangeForm
+
 
 def register(request):
     if request.method == 'POST':
@@ -43,3 +45,24 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
+
+@login_required
+def new_password(request):
+    if request.method == "POST":
+        u_pass = PasswordChangeForm(user=request.user, data=request.POST) # including request.POST as the first parameter passes the updated form values when the form is submitted
+
+        if u_pass.is_valid():
+            print('u pass is valid, trying to save')
+            u_pass.save()
+            messages.success(request, f'Password updated')
+            return redirect('profile')
+        else:
+            print('something is not valid')
+    else:
+        u_pass = PasswordChangeForm(user=request.user) # passing the current user instance allows you to prepopulate the form fields
+
+    context = {
+        'u_pass': u_pass
+    }
+
+    return render(request, 'users/password_new.html', context)
