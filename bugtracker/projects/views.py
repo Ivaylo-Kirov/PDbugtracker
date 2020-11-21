@@ -54,9 +54,7 @@ class BugDetailView(LoginRequiredMixin, DetailView):
     # overriding get_object here allows you to apply extra functionality, such as modifying a "last_accessed" value on the db object before returning it to the user
     # https://docs.djangoproject.com/en/3.1/topics/class-based-views/generic-display/#performing-extra-work
 
-class BugDeleteView(LoginRequiredMixin, DeleteView):
-    model = Bug
-    success_url = reverse_lazy('bugs-list')
+
 
 
 ############
@@ -121,5 +119,22 @@ class BugUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+############
+############
+
+
+
+
+############
+## DELETE ##
+############
+class BugDeleteView(LoginRequiredMixin, DeleteView):
+    model = Bug
+    success_url = reverse_lazy('bugs-list')
+
+
+class CommentDeleteView(LoginRequiredMixin, DeleteView):
+    model = Comment
+    success_url = reverse_lazy('bugs-list')
 ############
 ############

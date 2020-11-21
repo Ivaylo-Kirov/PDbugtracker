@@ -32,6 +32,9 @@
                         <small class="text-muted"><strong>Author:</strong> {{ comment.author }}<br>
                         Date Created:</strong> {{ comment.date_added }}</small>
                         <p>{{comment.desc}}</p>
+                        {% if request.user == comment.author %}
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'comment-delete' comment.id %}"><i class="far fa-trash-alt"></i> Delete</a>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </ul>
