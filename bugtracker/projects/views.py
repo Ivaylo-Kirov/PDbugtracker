@@ -9,6 +9,12 @@ from django.core.paginator import Paginator
 from django.views.decorators.http import require_GET
 from django.http import HttpResponse, Http404
 
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 # Create your views here.
 @login_required
 def home(request):
@@ -73,6 +79,7 @@ class BugCreateView(LoginRequiredMixin, CreateView):
     model = Bug
 
     def form_valid(self, form):
+        logger.error("new bug created")
         form.instance.author = self.request.user
         return super().form_valid(form)
 

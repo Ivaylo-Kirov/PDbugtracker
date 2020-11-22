@@ -32,7 +32,7 @@ class Bug(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
-    image = models.ImageField(upload_to='bug_pics', default='default_bug.png')
+    image = models.ImageField(upload_to='bug_pics', default='default_bug.png') #image field has automatic validation to ensure the upload is a valid image - no need for further validation on file size since we are using Pillow to resize to a manageable size
     image2 = models.ImageField(upload_to='bug_pics', default='default_bug.png')
 
     resolved = models.BooleanField(default=False)
