@@ -9,11 +9,11 @@
                             <small class="text-muted"><strong>Last Modified:</strong> {{ project.date_modified }}</small>
                         </div>
                 </div>
-                <h2><a class="article-title" href="{% url 'bugs-project' project.id %}">{{ project.name }}</a></h2>
+                <h2><a class="article-title" href="{% url 'bugs-project' project.id project.name %}">{{ project.name }}</a></h2>
                 <p class="article-content"><strong>Project Type:</strong> {{ project.get_proj_type_display }}</p>
                 <p class="article-content"><strong>Number of bugs:</strong> {{ project.bug_set.count }}</p>
-                <p>Recent bugs: 
-                    <ul>
+                <p><strong>Recent bugs: </strong>
+                    <ul class="bugs">
                         {% for bug in project.bug_set.all|slice:":3" %}
                         <li><a href="{% url 'bugs-detail' bug.id %}">Bug ID: {{bug.id}} | {{ bug.name }} - {{ bug.desc|truncatewords:"5"}}</a></li>
                         {% endfor %}
