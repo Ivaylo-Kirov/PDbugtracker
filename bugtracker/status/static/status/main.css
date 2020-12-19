@@ -131,3 +131,15 @@ body {
 .bugs a:visited {text-decoration:none;} 
 .bugs a:hover {color:#8397ab; text-decoration:none;}   
 .bugs a:active {text-decoration:none;}  
+
+.dark-button {
+  background-color: #18334e; 
+  border-color: #18334e;
+  color: white;
+}
+
+.dark-button:hover {
+  background-color: #18334e; 
+  border-color: #18334e;
+  color: white;
+}

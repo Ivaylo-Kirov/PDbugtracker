@@ -1,6 +1,6 @@
 {% extends "status/base.html" %}
 {% block content %}
-    <h1>Bugs List</h1>
+    <h1>Bugs</h1>
     {% include 'projects/pagination.html' %}
         
     {% for bug in bug_list %} 
@@ -8,7 +8,7 @@
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
-                    <small class="text-muted"><strong>Project:</strong> <a href="{% url 'bugs-project' bug.project.id bug.project.name %}">{{ bug.project }}</a> | <strong>Author:</strong> {{ bug.author }}<br/></small>
+                    <small class="text-muted"><strong>Project:</strong> <a href="{% url 'bugs-project' bug.project.id bug.project.name %}">{{ bug.project }}</a> | <strong>Created by:</strong> {{ bug.author }}<br/></small>
                     <small class="text-muted">Date Created: {{ bug.date_added }}</small>
                     <small class="text-muted">Last Modified: {{ bug.date_modified }}</small>
                 </div>
@@ -16,9 +16,9 @@
                 <p>{{bug.desc|truncatewords:"10"}}</p>
                 <p class="article-content"><strong>Bug Type:</strong> {{ bug.get_bug_type_display }}</p>
                 <p><strong>Status:</strong> {{bug.resolved|yesno:"<span style='color: white; background-color: green; padding: 5px;'>Resolved</span>, <span style='color: white; background-color: red; padding: 5px;'>Unresolved</span>"|safe}}</p>
-                <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-detail' bug.id %}"><i class="far fa-file-alt"></i> View Full Details</a> 
-                <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-update' bug.id %}"><i class="far fa-edit"></i> Edit</a>
-                <a class="btn btn-outline-danger btn-sm" href="{% url 'bugs-delete' bug.id %}"><i class="far fa-trash-alt"></i> Delete</a>
+                <a class="btn btn-primary btn-sm dark-button" href="{% url 'bugs-detail' bug.id %}"><i class="far fa-file-alt"></i> View Full Details</a> 
+                <a class="btn btn-primary btn-sm dark-button" href="{% url 'bugs-update' bug.id %}"><i class="far fa-edit"></i> Edit</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'bugs-delete' bug.id %}"><i class="far fa-trash-alt"></i> Delete</a>
             </div>
         </article>
     {% endfor %}

@@ -1,6 +1,6 @@
 {% extends "status/base.html" %}
 {% block content %}
-    <h1>Bugs List</h1>
+    <h1>Bugs</h1>
     <h4><strong>Project ID:</strong> {{ view.kwargs.id }} | <strong>Project Name:</strong> {{view.kwargs.name}} | <strong>Total bugs:</strong> {{ page_obj.paginator.count }}</h4>
     {% include 'projects/pagination.html' %}
 
@@ -22,9 +22,9 @@
                 <p>{{bug.desc}}</p>
                 <p class="article-content"><strong>Bug Type:</strong> {{ bug.get_bug_type_display }}</p>
                 <p><strong>Status:</strong> {{bug.resolved|yesno:"<span style='color: white; background-color: green; padding: 5px;'>Resolved</span>, <span style='color: white; background-color: red; padding: 5px;'>Unresolved</span>"|safe}}</p>
-                <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-detail' bug.id %}"><i class="far fa-file-alt"></i> View Full Details</a> 
-                <a class="btn btn-outline-primary btn-sm" href="{% url 'bugs-update' bug.id %}"><i class="far fa-edit"></i> Edit</a>
-                <a class="btn btn-outline-danger btn-sm" href="{% url 'bugs-delete' bug.id %}"><i class="far fa-trash-alt"></i> Delete</a>
+                <a class="btn btn-primary btn-sm dark-button" href="{% url 'bugs-detail' bug.id %}"><i class="far fa-file-alt"></i> View Full Details</a> 
+                <a class="btn btn-primary btn-sm dark-button" href="{% url 'bugs-update' bug.id %}"><i class="far fa-edit"></i> Edit</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'bugs-delete' bug.id %}"><i class="far fa-trash-alt"></i> Delete</a>
             </div>
         </article>
     {% endfor %}
